@@ -29,10 +29,17 @@ kotlin {
 
     jvm()
 
-    js {
-        browser()
-        binaries.executable()
+
+  js(IR) {
+    browser {
+      commonWebpackConfig {
+        cssSupport {
+          enabled.set(true)
+        }
+      }
     }
+    binaries.executable()
+  }
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {

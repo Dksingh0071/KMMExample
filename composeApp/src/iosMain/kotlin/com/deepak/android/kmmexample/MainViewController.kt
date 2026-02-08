@@ -4,6 +4,7 @@ import androidx.compose.ui.window.ComposeUIViewController
 import androidx.compose.runtime.Composable
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.UIKit.UIScreen
+import kotlinx.cinterop.useContents
 
 fun MainViewController() = ComposeUIViewController { App(
   systemUiController = SystemUiController(),
@@ -17,11 +18,17 @@ actual class ScreenInfoProvider {
   @Composable
   actual fun get(): ScreenInfo {
     val bounds = UIScreen.mainScreen.bounds
-    return ScreenInfo(
-      widthDp = 360,
-      heightDp = 720,
-      isLandscape = false
-    )
+
+    return bounds.useContents {
+      val widthDp = size.width.toInt()
+      val heightDp = size.height.toInt()
+
+      ScreenInfo(
+        widthDp = widthDp,
+        heightDp = heightDp,
+        isLandscape = widthDp > heightDp
+      )
+    }
   }
 }
 

@@ -11,7 +11,8 @@ fun main() = application {
         title = "KMM Example",
     ) {
         App(
-          screenInfoProvider =
+          screenInfoProvider =,
+          systemUiProvide =
         )
         CoroutineScope(Dispatchers.IO)
     }

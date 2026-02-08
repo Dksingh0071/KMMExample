@@ -1,29 +1,29 @@
 package com.deepak.android.kmmexample
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.platform.LocalConfiguration
-import android.app.Activity
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.core.view.WindowInsetsControllerCompat
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    enableEdgeToEdge()
+    super.onCreate(savedInstanceState)
 
-        setContent {
-          App(
-            systemUiController = rememberSystemUiController(),
-            screenInfoProvider = rememberScreenInfoProvider()
-          )
-        }
+    setContent {
+      App(
+        systemUiController = rememberSystemUiController(),
+        screenInfoProvider = rememberScreenInfoProvider()
+      )
     }
+  }
 }
+
 @Composable
 fun rememberSystemUiController(): SystemUiController {
   val activity = androidx.compose.ui.platform.LocalView.current.context as Activity
@@ -34,7 +34,6 @@ fun rememberSystemUiController(): SystemUiController {
 fun rememberScreenInfoProvider(): ScreenInfoProvider {
   return remember { ScreenInfoProvider() }
 }
-
 
 actual class ScreenInfoProvider {
   @Composable
